@@ -1,0 +1,2 @@
+# refrigerator-manager
+Managing refrigerator
