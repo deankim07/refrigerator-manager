@@ -1,0 +1,122 @@
+### OSX ###
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# sftp configuration file
+sftp-config.json
+
+# Basics
+*.py[cod]
+__pycache__
+*$py.class
+
+# Logs
+*.log
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*,cover
+.hypothesis/
+
+# Translations
+*.mo
+*.pot
+
+# Distribution / packaging
+.Python
+env/
+# build/
+develop-eggs/
+# dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# PyInstaller
+#  Usually these files are written by a python script from a template
+#  before PyInstaller builds the exe, so as to inject date/other infos into it.
+*.manifest
+*.spec
+
+# Django stuff:
+local_settings.py
+
+# PyBuilder
+target/
+
+# IPython Notebook
+.ipynb_checkpoints
+
+# pyenv
+.python-version
+
+# Sphinx documentation
+docs/_*
+!docs/__init__.py
+
+# dotenv
+.env
+.env_dev_online
+.env_statging
+.env_production
+.env_prod
+
+
+# virtualenv
+venv/
+ENV/
+
+# Pycharm
+.idea/*
+
+# Provided default Pycharm Run/Debug Configurations should be tracked by git
+# In case of local modifications made by Pycharm, use update-index command
+# for each changed file, like this:
+#!.idea/runConfigurations/
+!.idea/refrigerator-manager.iml
+!.idea/vcs.xml
+!.idea/webResources.xml
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Jenkins
+reports/
+!reports/.gitkeep
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
+
+# sqlite
+testdb
+
+# docs
+docs/*.png
+
+# Something..
+invisible/
+
+# Secret
+secrets.json

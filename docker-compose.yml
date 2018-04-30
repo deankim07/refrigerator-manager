@@ -1,0 +1,95 @@
+version: '2'
+
+services:
+
+  refrigeratordb:
+    image: "postgres:9.6.1"
+    container_name: refrigeratordb
+    ports:
+     - "5432:5432"
+    environment:
+     POSTGRES_PASSWORD: "sodwkdrh"
+     POSTGRES_USER: "refrigerator"
+     POSTGRES_DB: "refrigeratordb"
+
+  refrigerator:
+    build: .
+    container_name: refrigeratormanager
+    ports:
+     - "3000:8000"
+     - "3030:3030"
+    depends_on:
+     - refrigeratordb
+     - sonar
+#    links:
+#     - refrigeratordb:refrigeratordb
+    volumes:
+     - .:/var/www/refrigerator
+    entrypoint: /bin/bash
+    stdin_open: true  # means -i option in docker run
+    tty: true         # means -t option in docker run
+
+  sonar:
+    image: sonarqube
+    ports:
+      - 9000:9000
+    depends_on:
+      - mysql
+    environment:
+      - SONAR_JDBC_URL=jdbc:mysql://mysql:3306/sonarqube?useUnicode=true&characterEncoding=utf8&rewriteBatchedStatements=true
+      - SONAR_DB_USERNAME=sonarqube
+      - SONAR_DB_PASSWORD=sonarqube
+
+  mysql:
+    image: mysql:5.6
+    hostname: mysql
+    expose:
+      - 3306
+    environment:
+      - MYSQL_ROOT_PASSWORD=mysecretpassword
+      - MYSQL_USER=sonarqube
+      - MYSQL_PASSWORD=sonarqube
+      - MYSQL_DATABASE=sonarqube
+
+
+#  sonarqube:
+#    image: sonarqube
+#    ports:
+#      - "9000:9000"
+#    networks:
+#      - sonarnet
+#    environment:
+#      - SONARQUBE_JDBC_URL=jdbc:postgresql://db:5432/sonar
+#    volumes:
+#      - sonarqube_conf:/opt/sonarqube/conf
+#      - sonarqube_data:/opt/sonarqube/data
+#      - sonarqube_extensions:/opt/sonarqube/extensions
+#      - sonarqube_bundled-plugins:/opt/sonarqube/lib/bundled-plugins
+#    restart: always
+#
+#  db:
+#    image: postgres
+#    networks:
+#      - sonarnet
+#    environment:
+#      - POSTGRES_USER=sonar
+#      - POSTGRES_PASSWORD=sonar
+#    volumes:
+#      - postgresql:/var/lib/postgresql
+#      # This needs explicit mapping due to https://github.com/docker-library/postgres/blob/4e48e3228a30763913ece952c611e5e9b95c8759/Dockerfile.template#L52
+#      - postgresql_data:/var/lib/postgresql/data
+#
+#networks:
+#  sonarnet:
+#    driver: bridge
+#
+#volumes:
+#  sonarqube_conf:
+#  sonarqube_data:
+#  sonarqube_extensions:
+#  sonarqube_bundled-plugins:
+#  postgresql:
+#  postgresql_data:
+
+# docker run -d --name sonarqube -p 9000:9000 -p 9092:9092 -e SONARQUBE_JDBC_USERNAME=refrigerator -e SONARQUBE_JDBC_PASSWORD=sodwkdrh -e SONARQUBE_JDBC_URL=jdbc:refrigeratordb://pgsonar:5432/sonar sonarqube
+# docker run -d --name sonarqube -p 9000:9000 -p 9092:9092 sonarqube
