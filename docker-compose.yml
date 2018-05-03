@@ -51,6 +51,47 @@ services:
       - MYSQL_PASSWORD=sonarqube
       - MYSQL_DATABASE=sonarqube
 
+  jenkins:
+    image: bitnami/jenkins:latest
+    ports:
+      - '80:8080'
+      - '443:8443'
+    volumes:
+      - jenkins_data:/bitnami
+    depends_on:
+      - sonar
+    links:
+      - sonar
+
+volumes:
+  jenkins_data:
+    driver: local
+
+#  jenkins:
+#    image: 'bitnami/jenkins:latest'
+#    ports:
+#      - '80:8080'
+#      - '443:8443'
+#    volumes:
+#      - ./FOR_JENKINS:/private/var/jenkins_home
+#    environment:
+#      JENKINS_HOST_HOME: "/data/jenkins"
+#    ports:
+#      - "80:8080"
+#      - "50000:50000"
+#    privileged: true
+#    volumes:
+#        # enable persistent volume (warning: make sure that the local jenkins_home folder is created)
+#        - /private/var/wisestep/data/jenkins_home:/private/var/jenkins_home
+#        # mount docker sock and binary for docker in docker (only works on linux)
+#        - /private/var/run/docker.sock:/private/var/run/docker.sock
+#        - /usr/bin/docker:/usr/bin/docker
+#    volumes:
+#      - 'jenkins_data:/bitnami'
+#volumes:
+#  jenkins_data:
+#    driver: local
+
 
 #  sonarqube:
 #    image: sonarqube
