@@ -2,18 +2,19 @@ language: python
 python:
   - "3.6"
 
+dist: trusty
+sudo: required
+
 # command to install dependencies
 install: "pip install -r requirements.txt"
 
 addons:
   sonarcloud:
-    organization: "dean-kim-github" # the key of the org you chose at step #3
+    organization: "dean-kim-github"
     token:
-      # encrypted value of your token
       secure: "OUlZez+yyoMcs26OVLPs2Em2XbcK08B4rmmMI/+uHikgF1W8XMo0slzbU39sRIEmf7NwDws5Q09jl7AOZf3OFHXfu4WpR3RT3rLPy1lfHAUOl1k8Q+ajua1YPT5drE0saBNaQGytcSAwk42ypfWpV0OOH5OT1x7ZHA4uhzu3p1LDGuJ4GeBb3A+WitBooZyFbd+HmOpBqRG2GRummSeicrmX49cJlgD2CoK9LgTQNYYQMtFTteHmtNjE+HwbLt696n0xApDpOYBC9dSl/A5vz94n9i4L+RJ+B394Ij+rwoqsooFMKKCDtNfe7IYzF7cXRSSHuemGbuF0chyS5Y1jO0QtiILCKZnKJTZhO9c3t1O6r4rzEsseUdfRt9VVVLvFw7+gLNtLk0zONuTLQARsqHLtiy2j38QjKgQ5onI9SpaBICA+KUsIthILW7xuuGgs+3vGV7pPBFS9m332Ftcrin1KOMn/enoWQHKoJkzPKU2VcBdvvXplsvMTsJp+eFma0NM7xiBiOdhs2ay3MjpuqO7IQbbhiYGEztWbBuhF3KOUi9Yj0awccXjScDYyArCJnot/j3vdScfMcLz/XGYw1lXkZmmYXUMcJfgWbn+/wgaZ2lIpwNwKAhoC6R0BiWSvb5wZaenY47WeNnkeZMgT6ynic8FEit2qHyoKcOyDALE="
 
 script:
-  # other script steps might be done before running the actual analysis
   - sonar-scanner
 
 cache:
