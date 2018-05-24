@@ -18,7 +18,12 @@ from django.urls import path
 from django.conf.urls import include, url
 from django.conf import settings
 
+from rest_framework_swagger.views import get_swagger_view
+
+schema_view = get_swagger_view(title='Refrigerator-manager API')
+
 
 urlpatterns = [
     url(settings.ADMIN_URL, admin.site.urls),
+    url(r'^rest-swagger/', schema_view),
 ]

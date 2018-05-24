@@ -1,5 +1,0 @@
-from django.apps import AppConfig
-
-
-class RefrigeratorConfig(AppConfig):
-    name = 'refrigerator_manager.apps.refrigerator'
