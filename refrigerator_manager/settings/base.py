@@ -53,7 +53,10 @@ THIRD_PARTY_APPS = (
 )
 
 LOCAL_APPS = (
-    'vegetables',
+    'items',
+    'place',
+    'core',
+    'users',
 )
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
