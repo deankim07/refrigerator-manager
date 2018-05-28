@@ -5,6 +5,7 @@ from django.utils import timezone
 
 from place.tests.factories import PlaceFakeFactory
 from core.constant import CategoryConstant
+from users.tests.factories import UserFactory
 
 
 class PaprikaFakeFactory(factory.django.DjangoModelFactory):
@@ -16,6 +17,7 @@ class PaprikaFakeFactory(factory.django.DjangoModelFactory):
     save_begin = factory.Faker('date')
     storage_period = 7
     quantity = 3
+    user = factory.SubFactory(UserFactory)
 
     @factory.post_generation
     def left_storage_period(self, create, extracted, **kwargs):

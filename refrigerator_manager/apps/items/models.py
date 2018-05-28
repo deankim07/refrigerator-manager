@@ -1,6 +1,7 @@
 from datetime import timedelta
 from django.db import models
 from django.utils import timezone
+from django.conf import settings
 
 from place.models import Place
 from core.constant import CategoryConstant
@@ -8,6 +9,7 @@ from core.constant import CategoryConstant
 
 class Paprika(models.Model):
 
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, blank=True, on_delete=models.PROTECT)
     place = models.ForeignKey(Place, on_delete=models.CASCADE)
     category = models.CharField(max_length=20, choices=CategoryConstant.TYPE,
                                 default=CategoryConstant.VEGETABLE)

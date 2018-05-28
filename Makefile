@@ -1,7 +1,7 @@
 MAKE_FILE_SETTING := settings
 
 migrations:
-	python3.6 manage.py makemigrations refrigerator freezer vegetables
+	python3.6 manage.py makemigrations core place users items
 
 migrate:
 	python3.6 manage.py migrate
