@@ -24,8 +24,8 @@ class Paprika(models.Model):
     @property
     def left_storage_period(self):
         days = timedelta(days=float(str(self.storage_period)))
-        dead_line = self.save_begin.date() + days
-        left_days = dead_line - timezone.now()
+        dead_line = self.save_begin + days
+        left_days = dead_line - timezone.now().date()
         return left_days
 
 

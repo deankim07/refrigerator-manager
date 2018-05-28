@@ -21,4 +21,5 @@ class PaprikaFakeFactoryTest(TestCase):
 
     def test_paprika_can_create(self):
         self.assertEqual(Paprika.objects.count(), 1)
+        print(Paprika.objects.first().left_storage_period)
         self.assertEqual(Paprika.objects.first().user_id, self.user.id)
