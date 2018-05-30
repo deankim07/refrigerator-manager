@@ -7,7 +7,6 @@ sudo: required
 
 # command to install dependencies
 install:
-  install:
   # Update docker-engine using Ubuntu 'trusty' apt repo
   - >
     curl -sSL "https://get.docker.com/gpg" |
@@ -17,8 +16,7 @@ install:
      sudo tee -a /etc/apt/sources.list
   - sudo apt-get update
   - >
-    sudo apt-get -o Dpkg::Options::="--force-confdef" \
-     -o Dpkg::Options::="--force-confold" --assume-yes install docker-engine
+    sudo apt-get -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" --assume-yes install docker-engine
   - docker version
   # Update docker-compose via pip
   - sudo pip install docker-compose
