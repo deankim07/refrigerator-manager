@@ -6,41 +6,31 @@ dist: trusty
 sudo: required
 
 # command to install dependencies
+
+services:
+  - docker
 env:
-  # You may want to update this to whatever the latest version is, or keep it
-  # the same as your local machines. However, I have only tested it with 1.8.0+.
-  # There should be a time in the future when this is not necessary - it is
-  # explained in more detail below.
-  DOCKER_COMPOSE_VERSION: 1.8.0
+  DOCKER_COMPOSE_VERSION: 1.6.2
 
 before_install:
-  # update is required to update the repositories to see the new packages for
-  # Docker.
-  - sudo apt-get update
-
-  # Now we can install the newer docker-engine which is required for the newer
-  # docker-composer we will install next. The messy options are to force it to
-  # be non-interactive (normally it asks you a bunch of config questions).
-  - sudo apt-get install -o Dpkg::Options::="--force-confold" --force-yes -y docker-engine
-
-  # Print out the current docker-compose version. Once this reports 1.6+ then we
-  # do not need the following steps.
-  - docker-compose --version
-
-  # As of the writing of this script Travis has docker-compose v1.4.2, we need
-  # to update it to 1.8+. $DOCKER_COMPOSE_VERSION is provide from the `env`
-  # above.
+  # Install a later docker
+  - sudo apt-get update -y
+  - sudo timedatectl set-timezone UTC
+  - sudo apt-get install -y apt-transport-https ca-certificates apparmor libfaketime
+  - sudo apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
+  - sudo su -c "echo 'deb https://apt.dockerproject.org/repo ubuntu-trusty main' > /etc/apt/sources.list.d/docker.list"
+  - sudo apt-get update -y
+  - sudo apt-cache policy docker-engine
+  - >
+    sudo apt-get -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" install -y docker-engine
+  - sudo service docker stop || true
+  - sudo service docker start
+  # Setup docker-compose
   - sudo rm /usr/local/bin/docker-compose
   - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
   - chmod +x docker-compose
   - sudo mv docker-compose /usr/local/bin
 
-  # Check that docker-compose is now running the latest version (or at least the
-  # one we specified). This is not to be confused with the version we printed
-  # before doing the update.
-  - docker-compose --version  # Update docker-compose via pip
-  - sudo pip install docker-compose
-  - docker-compose version
 
 addons:
   sonarcloud:
@@ -48,6 +38,8 @@ addons:
     token:
       secure: "gw3yN07K7+bgd4HYCYoK6yhah44Ggy29uRmEA0jbwqWSQ5iYfiGutNTV935CTsrZdQnJ+OTDxl9cLqAn3yEsvnZSE5vTIWILQbSysZsVwkUlEIeWnxc5tIFgF/zMsutXYQfqkmLHa0gm5PKKIAGUcF7YLO2SD6WPvE0kiYZqRQgCI9ZcvEbmma0Lqve9+TVNjSqrWpch8OHx1xwAATWmiVJK2qKig/r8YZfDcv52NqcqqWC8rwtzQKM/BEE2tlvDQA/jqH48gJXmpkI4Xy7+JyKV0MzyWdCNQxGa9lGGvwa5XXegObGX5rUJU3Eu+7PdtZIlZk5PD/Uq89kzgpUFZnwpiXDosJ9kaREPPq2IiuXs11Ylalyhqq20iRAbltrVQGD5vQACa642pAEtpEjkgTHELbjWMiJ7l/4xLYjPu6HlEzpYcM3+ctu2zkBw8tNKXU/Jelz4Ki3pcwf3PZxJeGEIJshRirDKmNErD5dSs7Eq+0qRbE/oftUMTkTdPnLBEhE//lR/JLWTCHXHtV8yxsfKEcYC0jRMp6UMq860HpO1SmJV1neHrgoqzlPX1obfemIvXQrmXa4VCkzC1hTK7+ZYGg82Dkjl9vna1jVd/Si+N39cJd0/Eo18HW+SGY1uNVPGdmSfyTAV84MPJd2MMRiQW+4E+6V6/lp5mi8rNwU="
 script:
+  - docker-compose build
+  - docker-compose up -d
   - sonar-scanner
 
 cache:
