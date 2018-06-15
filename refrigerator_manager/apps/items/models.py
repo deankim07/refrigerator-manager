@@ -30,3 +30,5 @@ class Paprika(models.Model):
 
 
 
+
+
