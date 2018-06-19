@@ -4,16 +4,16 @@ from datetime import timedelta
 from django.utils import timezone
 
 from place.tests.factories import PlaceFakeFactory
-from core.constant import CategoryConstant
+from core.constant import VegetableConstant
 from users.tests.factories import UserFactory
 
 
-class PaprikaFakeFactory(factory.django.DjangoModelFactory):
+class VegetablesFakeFactory(factory.django.DjangoModelFactory):
     class Meta:
-        model = 'items.Paprika'
+        model = 'items.Vegetables'
 
     place = factory.SubFactory(PlaceFakeFactory)
-    category = CategoryConstant.VEGETABLE
+    category = VegetableConstant.PAPRIKA
     save_begin = factory.Faker('date')
     storage_period = 7
     quantity = 3
