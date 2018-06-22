@@ -41,7 +41,6 @@ addons:
 script:
 - docker-compose build
 - docker-compose up -d
-- python3.6 manage.py makemigrations core place users items
 #- docker exec -ti refrigeratormanager /bin/bash && python3.6 manage.py makemigrations core place users items
 #- docker exec -ti refrigeratormanager /bin/bash && python3.6 manage.py migrate
 #- docker exec -ti refrigeratormanager /bin/bash && python3.6 manage.py test refrigerator_manager.apps.items.tests.test__items_api
@@ -49,7 +48,8 @@ script:
 - sonar-scanner
 
 run:
-- docker exec -ti refrigeratormanager /bin/bash && python3.6 manage.py makemigrations core place users items
+- docker exec -ti refrigeratormanager /bin/bash
+- python3.6 manage.py makemigrations core place users items
 #- python3.6 manage.py migrate
 #- python3.6 manage.py test refrigerator_manager.apps.items.tests.test__items_api
 
