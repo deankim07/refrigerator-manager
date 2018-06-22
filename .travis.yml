@@ -37,11 +37,11 @@ addons:
 
 before_script:
   - psql -c 'create database travis_ci_test;' -U postgres
-  - python3.6 manage.py makemigrations
 
 script:
 - docker-compose build
 - docker-compose up -d
+- python3.6 manage.py makemigrations core place users items
 - python3.6 manage.py migrate
 - python3.6 manage.py test refrigerator_manager.apps.items.tests.test__items_api
 - sonar-scanner
