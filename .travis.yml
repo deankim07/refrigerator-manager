@@ -49,6 +49,8 @@ script:
 - sonar-scanner
 
 run:
+- python3.6 manage.py makemigrations core place users items
+- python3.6 manage.py migrate
 - python3.6 manage.py test refrigerator_manager.apps.items.tests.test__items_api
 
 cache:
