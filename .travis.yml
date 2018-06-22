@@ -41,9 +41,9 @@ before_script:
 script:
 - docker-compose build
 - docker-compose up -d
-- DJANGO_SETTINGS_MODULE='refrigerator_manager.settings.local' python3.6 manage.py makemigrations core place users items
-- DJANGO_SETTINGS_MODULE='refrigerator_manager.settings.local' python3.6 manage.py migrate
-- DJANGO_SETTINGS_MODULE='refrigerator_manager.settings.local' python3.6 manage.py test refrigerator_manager.apps.items.tests.test__items_api
+- docker exec -ti refrigeratormanager /bin/bash && python3.6 manage.py makemigrations core place users items
+- docker exec -ti refrigeratormanager /bin/bash && python3.6 manage.py migrate
+- docker exec -ti refrigeratormanager /bin/bash && python3.6 manage.py test refrigerator_manager.apps.items.tests.test__items_api
 - sonar-scanner
 cache:
   directories:
