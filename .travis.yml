@@ -41,7 +41,7 @@ before_script:
 script:
 - docker-compose build
 - docker-compose up -d
-- python3.6 manage.py makemigrations core place users items
+- python3.6 manage.py makemigrations
 - python3.6 manage.py migrate
 - python3.6 manage.py test refrigerator_manager.apps.items.tests.test__items_api
 - sonar-scanner
