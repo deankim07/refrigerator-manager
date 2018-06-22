@@ -19,9 +19,8 @@ before_install:
 - sudo apt-get update -y
 - sudo apt-cache policy docker-engine
 - 'sudo apt-get -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold"
-  install -y docker-engine
+  install -y docker-engine'
 
-'
 - sudo service docker stop || true
 - sudo service docker start
 - sudo rm /usr/local/bin/docker-compose
@@ -30,6 +29,7 @@ before_install:
 - chmod +x docker-compose
 - sudo mv docker-compose /usr/local/bin
 - tar xvf secrets.tar
+
 addons:
   sonarcloud:
     organization: dean-kim-github
@@ -45,8 +45,12 @@ script:
 #- docker exec -ti refrigeratormanager /bin/bash && python3.6 manage.py makemigrations core place users items
 #- docker exec -ti refrigeratormanager /bin/bash && python3.6 manage.py migrate
 #- docker exec -ti refrigeratormanager /bin/bash && python3.6 manage.py test refrigerator_manager.apps.items.tests.test__items_api
-- python3.6 manage.py test refrigerator_manager.apps.items.tests.test__items_api
+#- python3.6 manage.py test refrigerator_manager.apps.items.tests.test__items_api
 - sonar-scanner
+
+run:
+- python3.6 manage.py test refrigerator_manager.apps.items.tests.test__items_api
+
 cache:
   directories:
   - "$HOME/.sonar/cache"
