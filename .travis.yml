@@ -40,6 +40,7 @@ addons:
 script:
   - docker-compose build
   - docker-compose up -d
+  - python3.6 manage.py test refrigerator_manager.apps.items.tests.test__items_api
   - sonar-scanner
 
 cache:

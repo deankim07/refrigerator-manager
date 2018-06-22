@@ -22,7 +22,7 @@ from core.views import api_404
 
 from rest_framework_swagger.views import get_swagger_view
 
-from items.views import VegetablesListCreateAPIView
+from items.views import VegetablesListCreateAPIView, VegetableRetrieveUpdateDeleteView
 
 schema_view = get_swagger_view(title='Refrigerator-manager API')
 
@@ -30,7 +30,8 @@ schema_view = get_swagger_view(title='Refrigerator-manager API')
 urlpatterns = [
     url(settings.ADMIN_URL, admin.site.urls),
     url(r'^rest-swagger/', schema_view),
-    url(r'^vegetables/?$', VegetablesListCreateAPIView.as_view(), name='query_for_vegetables'),
+    url(r'^vegetables/?$', VegetablesListCreateAPIView.as_view(), name='query_for_vegetables_list'),
+    url(r'^vegetables/(?P<vegetable_id>[0-9]+)/?$', VegetableRetrieveUpdateDeleteView.as_view(), name='retrieve_update_delete_vegetable_item'),
 
     url(r'^.*', api_404, name='api_404'),
 ]

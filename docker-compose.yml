@@ -22,6 +22,6 @@ services:
      - refrigeratordb
     volumes:
      - .:/var/www/refrigerator
-#    entrypoint: /bin/sh
+    entrypoint: /bin/sh
     stdin_open: true  # means -i option in docker run
     tty: true         # means -t option in docker run
