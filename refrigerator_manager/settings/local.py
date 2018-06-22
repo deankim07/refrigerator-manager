@@ -17,11 +17,23 @@ from .base import *
 # ------------------------------------------------------------------------------
 DEBUG = env.bool('DJANGO_DEBUG', default=True)
 
-SECRETS_DIR = os.path.join(ROOT_DIR, '.secrets')
-SECRETS_BASE = os.path.join(SECRETS_DIR, 'secrets.json')
-secrets_base = json.loads(open(SECRETS_BASE, 'rt').read())
+#SECRETS_DIR = os.path.join(ROOT_DIR, '.secrets')
+SECRETS_DIR = ROOT_DIR.path('.secrets')
 
-SECRET_KEY = secrets_base['DJANGO_SECRET_KEY']
+SECRETS_BASE = SECRETS_DIR.path('secrets.json')
+# secrets_base = json.loads(open(SECRETS_BASE, 'rt').read())
+
+with open(".secrets/secrets.json") as f:
+    secrets = json.loads(f.read())
+
+def get_secret(setting, secrets=secrets):
+    try:
+        return secrets[setting]
+    except KeyError:
+        error_msg = "Set the {0} environment variable".format(setting)
+        raise ImproperlyConfigured(error_msg)
+
+SECRET_KEY = get_secret('DJANGO_SECRET_KEY')
 
 sys.path.insert(0, path.abspath(APPS_DIR()))
 
@@ -40,9 +52,9 @@ SETTING_TYPE = 'Common'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': secrets_base['DATABASE_NAME'],
-        'USER': secrets_base["DATABASE_USER"],
-        'PASSWORD': secrets_base["DATABASE_PASSWORD"],
+        'NAME': get_secret("DATABASE_NAME"),
+        'USER': get_secret("DATABASE_USER"),
+        'PASSWORD': get_secret("DATABASE_PASSWORD"),
         'HOST': 'refrigeratordb',
         'PORT': '5432',
     }
