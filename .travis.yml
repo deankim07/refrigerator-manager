@@ -7,7 +7,7 @@ services:
 - docker
 env:
   DOCKER_COMPOSE_VERSION: 1.6.2
-  DJANGO_SETTINGS_MODULE='refrigerator_manager.settings.local'
+- DJANGO_SETTINGS_MODULE='refrigerator_manager.settings.local'
 before_install:
 - openssl aes-256-cbc -K $encrypted_82bc063a33ad_key -iv $encrypted_82bc063a33ad_iv
   -in secrets.tar.enc -out secrets.tar -d
