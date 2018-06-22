@@ -119,4 +119,4 @@ docs/*.png
 invisible/
 
 # Secret
-secrets.json
+/.secrets
