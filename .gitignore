@@ -120,3 +120,4 @@ invisible/
 
 # Secret
 /.secrets
+secrets.tar

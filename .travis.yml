@@ -1,52 +1,46 @@
 language: python
 python:
-  - "3.6"
-
+- '3.6'
 dist: trusty
 sudo: required
-
-# command to install dependencies
-
 services:
-  - docker
+- docker
 env:
   DOCKER_COMPOSE_VERSION: 1.6.2
-
 before_install:
-  # Install a later docker
-  - sudo apt-get update -y
-  - sudo timedatectl set-timezone UTC
-  - sudo apt-get install -y apt-transport-https ca-certificates apparmor libfaketime
-  - sudo apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
-  - sudo su -c "echo 'deb https://apt.dockerproject.org/repo ubuntu-trusty main' > /etc/apt/sources.list.d/docker.list"
-  - sudo apt-get update -y
-  - sudo apt-cache policy docker-engine
-  - >
-    sudo apt-get -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" install -y docker-engine
-  - sudo service docker stop || true
-  - sudo service docker start
-  # Setup docker-compose
-  - sudo rm /usr/local/bin/docker-compose
-  - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
-  - chmod +x docker-compose
-  - sudo mv docker-compose /usr/local/bin
+- openssl aes-256-cbc -K $encrypted_82bc063a33ad_key -iv $encrypted_82bc063a33ad_iv
+  -in secrets.tar.enc -out secrets.tar -d
+- sudo apt-get update -y
+- sudo timedatectl set-timezone UTC
+- sudo apt-get install -y apt-transport-https ca-certificates apparmor libfaketime
+- sudo apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
+- sudo su -c "echo 'deb https://apt.dockerproject.org/repo ubuntu-trusty main' > /etc/apt/sources.list.d/docker.list"
+- sudo apt-get update -y
+- sudo apt-cache policy docker-engine
+- 'sudo apt-get -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold"
+  install -y docker-engine
 
-
+'
+- sudo service docker stop || true
+- sudo service docker start
+- sudo rm /usr/local/bin/docker-compose
+- curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname
+  -s`-`uname -m` > docker-compose
+- chmod +x docker-compose
+- sudo mv docker-compose /usr/local/bin
+- tar xvf secrets.tar
 addons:
   sonarcloud:
-    organization: "dean-kim-github"
+    organization: dean-kim-github
     token:
-      secure: "gw3yN07K7+bgd4HYCYoK6yhah44Ggy29uRmEA0jbwqWSQ5iYfiGutNTV935CTsrZdQnJ+OTDxl9cLqAn3yEsvnZSE5vTIWILQbSysZsVwkUlEIeWnxc5tIFgF/zMsutXYQfqkmLHa0gm5PKKIAGUcF7YLO2SD6WPvE0kiYZqRQgCI9ZcvEbmma0Lqve9+TVNjSqrWpch8OHx1xwAATWmiVJK2qKig/r8YZfDcv52NqcqqWC8rwtzQKM/BEE2tlvDQA/jqH48gJXmpkI4Xy7+JyKV0MzyWdCNQxGa9lGGvwa5XXegObGX5rUJU3Eu+7PdtZIlZk5PD/Uq89kzgpUFZnwpiXDosJ9kaREPPq2IiuXs11Ylalyhqq20iRAbltrVQGD5vQACa642pAEtpEjkgTHELbjWMiJ7l/4xLYjPu6HlEzpYcM3+ctu2zkBw8tNKXU/Jelz4Ki3pcwf3PZxJeGEIJshRirDKmNErD5dSs7Eq+0qRbE/oftUMTkTdPnLBEhE//lR/JLWTCHXHtV8yxsfKEcYC0jRMp6UMq860HpO1SmJV1neHrgoqzlPX1obfemIvXQrmXa4VCkzC1hTK7+ZYGg82Dkjl9vna1jVd/Si+N39cJd0/Eo18HW+SGY1uNVPGdmSfyTAV84MPJd2MMRiQW+4E+6V6/lp5mi8rNwU="
+      secure: gw3yN07K7+bgd4HYCYoK6yhah44Ggy29uRmEA0jbwqWSQ5iYfiGutNTV935CTsrZdQnJ+OTDxl9cLqAn3yEsvnZSE5vTIWILQbSysZsVwkUlEIeWnxc5tIFgF/zMsutXYQfqkmLHa0gm5PKKIAGUcF7YLO2SD6WPvE0kiYZqRQgCI9ZcvEbmma0Lqve9+TVNjSqrWpch8OHx1xwAATWmiVJK2qKig/r8YZfDcv52NqcqqWC8rwtzQKM/BEE2tlvDQA/jqH48gJXmpkI4Xy7+JyKV0MzyWdCNQxGa9lGGvwa5XXegObGX5rUJU3Eu+7PdtZIlZk5PD/Uq89kzgpUFZnwpiXDosJ9kaREPPq2IiuXs11Ylalyhqq20iRAbltrVQGD5vQACa642pAEtpEjkgTHELbjWMiJ7l/4xLYjPu6HlEzpYcM3+ctu2zkBw8tNKXU/Jelz4Ki3pcwf3PZxJeGEIJshRirDKmNErD5dSs7Eq+0qRbE/oftUMTkTdPnLBEhE//lR/JLWTCHXHtV8yxsfKEcYC0jRMp6UMq860HpO1SmJV1neHrgoqzlPX1obfemIvXQrmXa4VCkzC1hTK7+ZYGg82Dkjl9vna1jVd/Si+N39cJd0/Eo18HW+SGY1uNVPGdmSfyTAV84MPJd2MMRiQW+4E+6V6/lp5mi8rNwU=
 script:
-  - docker-compose build
-  - docker-compose up -d
-  - python3.6 manage.py makemigrations core place users items
-  - python3.6 manage.py migrate
-  - python3.6 manage.py test refrigerator_manager.apps.items.tests.test__items_api
-  - sonar-scanner
-
+- docker-compose build
+- docker-compose up -d
+- python3.6 manage.py makemigrations core place users items
+- python3.6 manage.py migrate
+- python3.6 manage.py test refrigerator_manager.apps.items.tests.test__items_api
+- sonar-scanner
 cache:
   directories:
-    - '$HOME/.sonar/cache'
-
-
+  - "$HOME/.sonar/cache"
