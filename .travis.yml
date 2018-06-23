@@ -50,7 +50,7 @@ script:
 #- docker exec -ti refrigeratormanager /bin/bash && python3.6 manage.py test refrigerator_manager.apps.items.tests.test__items_api
 #- python3.6 manage.py test refrigerator_manager.apps.items.tests.test__items_api
 #  - docker run --name testserver --net=host -e DJANGO_SETTINGS_MODULE='refrigerator_manager.settings.local' -e CI_SERVER=true refrigeratormanager /bin/bash -c 'python3.6 /var/www/refrigerator_manager/manage.py test refrigerator_manager.apps.items.tests.test__items_api'
-  - docker-compose run --rm refrigerator python manage.py makemigrations core place users items --settings=refrigerator_manager.settings.local
+  - docker-compose run --rm refrigerator python3.6 /var/www/refrigerator_manager/manage.py makemigrations core place users items --settings=refrigerator_manager.settings.local
   - docker-compose run refrigerator python manage.py test refrigerator_manager.apps.items.tests.test__items_api
 #  - docker-compose run --rm refrigerator python3.6 manage.py migrate --settings=refrigerator_manager.settings.local
   - sonar-scanner
