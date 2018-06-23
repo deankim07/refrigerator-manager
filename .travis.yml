@@ -40,8 +40,8 @@ addons:
 #before_script:
 #  - docker exec -ti refrigeratormanager /bin/bash && python3.6 manage.py makemigrations core place users items
 
-script:
-- docker exec -ti refrigeratormanager /bin/bash && python3.6 manage.py makemigrations core place users items
+#script:
+#- docker exec -ti refrigeratormanager /bin/bash && python3.6 manage.py makemigrations core place users items
 #- docker-compose build
 #- docker-compose up -d
 #- docker exec -ti refrigeratormanager /bin/bash
