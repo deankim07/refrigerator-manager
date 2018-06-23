@@ -54,7 +54,6 @@ script:
 #  - docker-compose run --rm refrigerator python3.6 manage.py migrate --settings=refrigerator_manager.settings.local
   - sonar-scanner
 
-
 cache:
   directories:
   - "$HOME/.sonar/cache"
