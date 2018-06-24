@@ -17,14 +17,13 @@ from .base import *
 # ------------------------------------------------------------------------------
 DEBUG = env.bool('DJANGO_DEBUG', default=True)
 
-#SECRETS_DIR = os.path.join(ROOT_DIR, '.secrets')
 SECRETS_DIR = ROOT_DIR.path('.secrets')
 
 SECRETS_BASE = SECRETS_DIR.path('secrets.json')
-# secrets_base = json.loads(open(SECRETS_BASE, 'rt').read())
 
 with open(".secrets/secrets.json") as f:
     secrets = json.loads(f.read())
+    
 
 def get_secret(setting, secrets=secrets):
     try:

@@ -24,7 +24,6 @@ APPS_DIR = SRC_DIR.path('apps')
 
 sys.path.insert(0, path.abspath(APPS_DIR()))
 
-# environ.Env.read_env(ROOT_DIR('.dev_env'))
 env = environ.Env()
 
 SETTING_TYPE = 'Common'
