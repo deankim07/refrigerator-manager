@@ -30,7 +30,7 @@ before_install:
 - tar xvf secrets.tar
 - docker-compose build
 - docker-compose up -d
-- docker-compose run refrigeratormanager /bin/sh -c "cd var/www/refrigerator_manager; python3.6 manage.py makemigrations core place users items"
+- docker-compose run refrigerator /bin/sh -c "cd var/www/refrigerator_manager; python3.6 manage.py makemigrations core place users items"
 
 addons:
   sonarcloud:
