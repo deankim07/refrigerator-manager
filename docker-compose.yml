@@ -6,7 +6,7 @@ services:
     image: "postgres:9.6.1"
     container_name: refrigeratordb
     ports:
-     - "5432:5432"
+     - "5432"
     environment:
      POSTGRES_PASSWORD: "sodwkdrh"
      POSTGRES_USER: "refrigerator"

@@ -32,7 +32,8 @@ before_install:
 - docker-compose up -d
 #- docker-compose run refrigerator /bin/bash -c "cd var/www/refrigerator_manager; python3.6 manage.py makemigrations core place users items"
 - docker exec -ti refrigeratormanager python3.6 manage.py makemigrations core place users items
-
+- docker exec -ti refrigeratormanager python3.6 manage.py migrate
+- docker exec -ti refrigeratormanager python3.6 manage.py test refrigerator_manager.apps.items.tests.test__items_api
 
 addons:
   sonarcloud:
