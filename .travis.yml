@@ -37,8 +37,8 @@ addons:
     token:
       secure: gw3yN07K7+bgd4HYCYoK6yhah44Ggy29uRmEA0jbwqWSQ5iYfiGutNTV935CTsrZdQnJ+OTDxl9cLqAn3yEsvnZSE5vTIWILQbSysZsVwkUlEIeWnxc5tIFgF/zMsutXYQfqkmLHa0gm5PKKIAGUcF7YLO2SD6WPvE0kiYZqRQgCI9ZcvEbmma0Lqve9+TVNjSqrWpch8OHx1xwAATWmiVJK2qKig/r8YZfDcv52NqcqqWC8rwtzQKM/BEE2tlvDQA/jqH48gJXmpkI4Xy7+JyKV0MzyWdCNQxGa9lGGvwa5XXegObGX5rUJU3Eu+7PdtZIlZk5PD/Uq89kzgpUFZnwpiXDosJ9kaREPPq2IiuXs11Ylalyhqq20iRAbltrVQGD5vQACa642pAEtpEjkgTHELbjWMiJ7l/4xLYjPu6HlEzpYcM3+ctu2zkBw8tNKXU/Jelz4Ki3pcwf3PZxJeGEIJshRirDKmNErD5dSs7Eq+0qRbE/oftUMTkTdPnLBEhE//lR/JLWTCHXHtV8yxsfKEcYC0jRMp6UMq860HpO1SmJV1neHrgoqzlPX1obfemIvXQrmXa4VCkzC1hTK7+ZYGg82Dkjl9vna1jVd/Si+N39cJd0/Eo18HW+SGY1uNVPGdmSfyTAV84MPJd2MMRiQW+4E+6V6/lp5mi8rNwU=
 
-before_script:
-- docker exec -ti refrigeratormanager /bin/bash
+#before_script:
+#- docker exec -ti refrigeratormanager /bin/bash
 #  - psql -c 'create database testdb;' -U postgres
 
 script:
@@ -46,12 +46,12 @@ script:
 #- docker-compose build
 #- docker-compose up -d
 #- docker exec -ti refrigeratormanager /bin/bash
-- python3.6 manage.py makemigrations core place users items
+#- python3.6 manage.py makemigrations core place users items
 #- docker exec -ti refrigeratormanager /bin/bash && python3.6 manage.py migrate
 #- docker exec -ti refrigeratormanager /bin/bash && python3.6 manage.py test refrigerator_manager.apps.items.tests.test__items_api
 #- python3.6 manage.py test refrigerator_manager.apps.items.tests.test__items_api
 #  - docker run --name testserver --net=host -e DJANGO_SETTINGS_MODULE='refrigerator_manager.settings.local' -e CI_SERVER=true refrigeratormanager /bin/bash -c 'python3.6 /var/www/refrigerator_manager/manage.py test refrigerator_manager.apps.items.tests.test__items_api'
-#- docker run --rm refrigerator python3.6 /var/www/refrigerator_manager/manage.py makemigrations core place users items --settings=refrigerator_manager.settings.local
+- docker-compose exec refrigerator python manage.py makemigrations core place users items
 #- docker run refrigerator python manage.py test refrigerator_manager.apps.items.tests.test__items_api
 #  - docker-compose run --rm refrigerator python3.6 manage.py migrate --settings=refrigerator_manager.settings.local
 - sonar-scanner
