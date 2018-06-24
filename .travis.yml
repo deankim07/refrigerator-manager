@@ -31,9 +31,7 @@ before_install:
 - docker-compose build
 - docker-compose up -d
 #- docker-compose run refrigerator /bin/bash -c "cd var/www/refrigerator_manager; python3.6 manage.py makemigrations core place users items"
-- docker exec -ti refrigeratormanager DJANGO_SETTINGS_MODULE='refrigerator_manager.settings.local' python3.6 manage.py makemigrations core place users items
-- docker exec -ti refrigeratormanager DJANGO_SETTINGS_MODULE='refrigerator_manager.settings.local' python3.6 manage.py migrate
-- docker exec -ti refrigeratormanager DJANGO_SETTINGS_MODULE='refrigerator_manager.settings.local' python3.6 manage.py test refrigerator_manager.apps.items.tests.test__items_api
+
 
 addons:
   sonarcloud:
@@ -58,6 +56,9 @@ script:
 #- docker-compose run refrigerator python manage.py makemigrations core place users items
 #- docker run refrigerator python manage.py test refrigerator_manager.apps.items.tests.test__items_api
 #  - docker-compose run --rm refrigerator python3.6 manage.py migrate --settings=refrigerator_manager.settings.local
+- docker exec -ti refrigeratormanager python3.6 manage.py makemigrations core place users items
+- docker exec -ti refrigeratormanager python3.6 manage.py migrate
+- docker exec -ti refrigeratormanager python3.6 manage.py test refrigerator_manager.apps.items.tests.test__items_api
 - sonar-scanner
 
 cache:
