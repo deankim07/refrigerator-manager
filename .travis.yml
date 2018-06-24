@@ -31,9 +31,9 @@ before_install:
 - docker-compose build
 - docker-compose up -d
 #- docker-compose run refrigerator /bin/bash -c "cd var/www/refrigerator_manager; python3.6 manage.py makemigrations core place users items"
-- docker exec -ti refrigeratormanager python3.6 manage.py makemigrations core place users items
-- docker exec -ti refrigeratormanager python3.6 manage.py migrate
-- docker exec -ti refrigeratormanager python3.6 manage.py test refrigerator_manager.apps.items.tests.test__items_api
+- docker exec -ti refrigeratormanager DJANGO_SETTINGS_MODULE='refrigerator_manager.settings.local' python3.6 manage.py makemigrations core place users items
+- docker exec -ti refrigeratormanager DJANGO_SETTINGS_MODULE='refrigerator_manager.settings.local' python3.6 manage.py migrate
+- docker exec -ti refrigeratormanager DJANGO_SETTINGS_MODULE='refrigerator_manager.settings.local' python3.6 manage.py test refrigerator_manager.apps.items.tests.test__items_api
 
 addons:
   sonarcloud:
@@ -46,7 +46,7 @@ addons:
 #  - psql -c 'create database testdb;' -U postgres
 
 script:
-- docker run -ti refrigeratormanager /bin/bash && python3.6 manage.py makemigrations core place users items
+#- docker run -ti refrigeratormanager /bin/bash && python3.6 manage.py makemigrations core place users items
 #- docker-compose build
 #- docker-compose up -d
 #- docker exec -ti refrigeratormanager /bin/bash
