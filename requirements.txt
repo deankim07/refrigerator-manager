@@ -28,3 +28,6 @@ Faker==0.8.16
 factory-boy==2.11.1
 python-dateutil==2.7.3
 text-unidecode==1.2
+
+# coverage
+coverage==4.5.1
