@@ -38,7 +38,7 @@ class Forks(models.Model):
     category = models.CharField(max_length=20, choices=ForkConstant.TYPE, null=True)
     save_begin = models.DateField(auto_now_add=True)
     storage_period = models.IntegerField(default=7)
-    quantity = models.DecimalField(max_digits=5, decimal_places=1)
+    quantity = models.IntegerField()
     gram_per_package = models.DecimalField(max_digits=5, decimal_places=1)
 
     class Meta:
