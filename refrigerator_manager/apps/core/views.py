@@ -4,6 +4,6 @@ from rest_framework.decorators import api_view
 from rest_framework.exceptions import NotFound
 
 
-@api_view(['GET', 'POST', 'PATCH', 'DELETE'])
+@api_view(['GET', 'POST', 'PATCH', 'DELETE']) # pragma: no cover
 def api_404(request):
     raise NotFound()

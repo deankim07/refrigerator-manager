@@ -1,0 +1,25 @@
+[run]
+include = musicspray_web_backend/*
+omit = *migrations*, *tests*, */tests/*, admin.py
+
+[html]
+directory = reports
+
+[report]
+omit =
+    */tests/*
+    */admin.py
+    */apps.py
+    */manage.py
+    */wsgi.py
+
+exclude_lines =
+    pragma: no cover
+    class Meta:
+    __str__
+    __unicode__
+    get_absolute_url
+
+
+
+

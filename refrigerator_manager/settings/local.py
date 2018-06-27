@@ -28,7 +28,7 @@ with open(".secrets/secrets.json") as f:
 def get_secret(setting, secrets=secrets):
     try:
         return secrets[setting]
-    except KeyError:
+    except KeyError: # pragma: no cover
         error_msg = "Set the {0} environment variable".format(setting)
         raise ImproperlyConfigured(error_msg)
 

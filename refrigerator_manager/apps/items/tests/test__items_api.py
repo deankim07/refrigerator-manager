@@ -38,6 +38,7 @@ class VegetablesListCreateAPIViewTest(APITestCase):
         response = self.client.post(self.url, data, format='json')
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertEqual(response.data['quantity'], str(data['quantity']))
+        self.assertIsNotNone(self.vegtable.left_storage_period)
 
 
 class VegetableItemRetrieveUpdateDeleteViewTest(APITestCase):
@@ -88,11 +89,13 @@ class ForksListCreateAPIViewTest(APITestCase):
             'category': 'LOIN',
             'quantity': 7,
             'place': self.place.id,
-            'gram_per_package': 100
+            'gram_per_package': 100,
+            'storage_period': 10,
         }
         response = self.client.post(self.url, data, format='json')
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertEqual(response.data['quantity'], data['quantity'])
+        self.assertIsNotNone(self.fork.left_storage_period)
 
 
 class ForkItemRetrieveUpdateDeleteViewTest(APITestCase):
