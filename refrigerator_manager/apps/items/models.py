@@ -27,6 +27,9 @@ class Vegetables(models.Model):
         left_days = dead_line - timezone.now().date()
         return left_days
 
+    def __str__(self):
+        return self.category
+
 
 class Forks(models.Model):
 
@@ -48,6 +51,9 @@ class Forks(models.Model):
         dead_line = self.save_begin + days
         left_days = dead_line - timezone.now().date()
         return left_days
+
+    def __str__(self):
+        return self.category
 
 
 

@@ -10,3 +10,6 @@ class Place(models.Model):
     """
     name = models.CharField(max_length=20, choices=PlaceConstant.TYPE)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, blank=True, on_delete=models.PROTECT)
+
+    def __str__(self):
+        return self.name
