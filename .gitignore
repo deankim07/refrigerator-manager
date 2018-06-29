@@ -16,15 +16,10 @@ __pycache__
 pip-log.txt
 pip-delete-this-directory.txt
 
-# Unit test / coverage reports
-htmlcov/
+# Unit test
 .tox/
-.coverage
-.coverage.*
 .cache
 nosetests.xml
-coverage.xml
-*,cover
 .hypothesis/
 
 # Translations
@@ -58,8 +53,6 @@ var/
 # Django stuff:
 local_settings.py
 
-# PyBuilder
-target/
 
 # IPython Notebook
 .ipynb_checkpoints
