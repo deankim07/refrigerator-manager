@@ -41,6 +41,8 @@ script:
 - docker exec -ti refrigeratormanager python3.6 manage.py makemigrations core place users items
 - docker exec -ti refrigeratormanager python3.6 manage.py migrate
 - docker exec -ti refrigeratormanager python3.6 manage.py test refrigerator_manager.apps.items.tests.test__items_api
+- docker exec -ti refrigeratormanager coverage run --source='.' manage.py test refrigerator_manager
+- docker exec -ti refrigeratormanager coverage xml -i
 - sonar-scanner -X -Dsonar.projectVersion=1.0.0
 
 cache:
