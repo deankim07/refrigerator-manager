@@ -5,7 +5,7 @@ services:
   refrigeratordb:
     image: "postgres:9.6.1"
     container_name: refrigeratordb
-    ports:
+    expose:
      - "5432"
     environment:
      POSTGRES_PASSWORD: "sodwkdrh"
@@ -15,8 +15,8 @@ services:
   refrigerator:
     build: .
     container_name: refrigeratormanager
-    ports:
-     - "3000:8000"
+    expose:
+     - "8000"
     depends_on:
      - refrigeratordb
     links:
@@ -26,3 +26,13 @@ services:
     entrypoint: /bin/sh
     stdin_open: true  # means -i option in docker run
     tty: true         # means -t option in docker run
+
+  nginx:
+    restart: always
+    build: ./nginx/
+    ports:
+     - "80:80"
+    volumes_from:
+     - refrigerator
+    links:
+     - refrigerator:refrigerator
