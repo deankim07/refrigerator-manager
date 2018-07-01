@@ -31,3 +31,6 @@ text-unidecode==1.2
 
 # coverage
 coverage==4.5.1
+
+# uwsgi
+uwsgi==2.0.17
