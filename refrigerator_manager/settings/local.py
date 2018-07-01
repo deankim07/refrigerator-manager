@@ -49,7 +49,7 @@ SETTING_TYPE = 'Common'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'ENGINE': 'nginx.conf.db.backends.postgresql_psycopg2',
         'NAME': get_secret("DATABASE_NAME"),
         'USER': get_secret("DATABASE_USER"),
         'PASSWORD': get_secret("DATABASE_PASSWORD"),

@@ -61,13 +61,13 @@ LOCAL_APPS = (
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
 MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'nginx.conf.middleware.security.SecurityMiddleware',
+    'nginx.conf.contrib.sessions.middleware.SessionMiddleware',
+    'nginx.conf.middleware.common.CommonMiddleware',
+    'nginx.conf.middleware.csrf.CsrfViewMiddleware',
+    'nginx.conf.contrib.auth.middleware.AuthenticationMiddleware',
+    'nginx.conf.contrib.messages.middleware.MessageMiddleware',
+    'nginx.conf.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
 ROOT_URLCONF = 'refrigerator_manager.urls'
@@ -96,16 +96,16 @@ WSGI_APPLICATION = 'refrigerator_manager.wsgi.application'
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        'NAME': 'nginx.conf.contrib.auth.password_validation.UserAttributeSimilarityValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        'NAME': 'nginx.conf.contrib.auth.password_validation.MinimumLengthValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+        'NAME': 'nginx.conf.contrib.auth.password_validation.CommonPasswordValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+        'NAME': 'nginx.conf.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
 
