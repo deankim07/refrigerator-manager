@@ -13,12 +13,14 @@ services:
 #     - refrigerator
     links:
      - refrigerator:refrigerator
+    depends_on:
+     - refrigerator
 
   refrigeratordb:
     image: "postgres:9.6.1"
     container_name: refrigeratordb
     expose:
-     - "5432"
+     - 5432
     environment:
      POSTGRES_PASSWORD: "sodwkdrh"
      POSTGRES_USER: "refrigerator"
@@ -28,14 +30,14 @@ services:
     build: .
     container_name: refrigeratormanager
     expose:
-     - "8000"
+     - 8000
     depends_on:
      - refrigeratordb
     links:
      - refrigeratordb
     volumes:
      - .:/var/www/refrigerator
-     - /var/www/refrigerator/static
-    entrypoint: /bin/sh
+    command: uwsgi --ini ./refrigerator_manager_uwsgi.ini
+#    entrypoint: /bin/sh
     stdin_open: true  # means -i option in docker run
     tty: true         # means -t option in docker run
