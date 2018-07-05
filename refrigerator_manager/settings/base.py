@@ -21,6 +21,7 @@ from django.core.exceptions import ImproperlyConfigured
 ROOT_DIR = environ.Path(__file__) - 3
 SRC_DIR = ROOT_DIR.path('refrigerator_manager')
 APPS_DIR = SRC_DIR.path('apps')
+STATIC_DIR = SRC_DIR.path('static')
 
 sys.path.insert(0, path.abspath(APPS_DIR()))
 
@@ -134,4 +135,19 @@ ADMIN_URL = r'sodwkdrhdjemals/'
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
+# STATIC FILE CONFIGURATION
+# ------------------------------------------------------------------------------
+# See: https://docs.djangoproject.com/en/dev/ref/settings/#static-root
+STATIC_ROOT = str(SRC_DIR('staticfiles'))
+
+# See: https://docs.djangoproject.com/en/dev/ref/settings/#static-url
 STATIC_URL = '/static/'
+
+# See: https://docs.djangoproject.com/en/dev/ref/contrib/staticfiles/#std:setting-STATICFILES_DIRS
+STATICFILES_DIRS = [str(SRC_DIR('static'))]
+
+# See: https://docs.djangoproject.com/en/dev/ref/contrib/staticfiles/#staticfiles-finders
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+)
