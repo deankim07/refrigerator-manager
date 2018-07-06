@@ -2,25 +2,10 @@ version: '2'
 
 services:
 
-  nginx:
-    restart: always
-    build: ./nginx
-    ports:
-     - "80:80"
-    volumes_from:
-     - refrigerator
-#    volumes:
-#     - static-data:/staticfiles
-#     - "./nginx/sites-enabled/nginx.conf:/etc/nginx/nginx.conf"
-    links:
-     - refrigerator:refrigerator
-    depends_on:
-     - refrigerator
-
   refrigeratordb:
     image: "postgres:9.6.1"
     container_name: refrigeratordb
-    expose:
+    ports:
      - "5432"
     environment:
      POSTGRES_PASSWORD: "sodwkdrh"
@@ -30,14 +15,14 @@ services:
   refrigerator:
     build: .
     container_name: refrigeratormanager
+    ports:
+     - "3000:8000"
     depends_on:
      - refrigeratordb
     links:
      - refrigeratordb
     volumes:
      - .:/var/www/refrigerator
-     - /usr/src/app/static
-    command: uwsgi --ini ./refrigerator_manager_uwsgi.ini
-#    entrypoint: /bin/sh
+    entrypoint: /bin/sh
     stdin_open: true  # means -i option in docker run
     tty: true         # means -t option in docker run
