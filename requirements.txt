@@ -49,3 +49,4 @@ uWSGI==2.0.17
 Werkzeug==0.14.1
 wsgi-request-logger==0.4.6
 zappa==0.46.1
+awscli==1.15.53
