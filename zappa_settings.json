@@ -1,10 +1,10 @@
 {
     "dev": {
         "aws_region": "ap-northeast-2",
-        "django_settings": "refrigerator_manager.settings",
+        "django_settings": "refrigerator_manager.settings.local",
         "profile_name": "default",
         "project_name": "refrigerator",
         "runtime": "python3.6",
-        "s3_bucket": "zappa-fcr4k8c1t"
+        "s3_bucket": "zappa-xbm6fu5jw"
     }
 }

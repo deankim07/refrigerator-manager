@@ -18,7 +18,7 @@ from django.urls import path
 from django.conf.urls import include, url
 from django.conf import settings
 
-from core.views import api_404
+from core.views import api_404, tempo_view
 
 from rest_framework_swagger.views import get_swagger_view
 
@@ -29,6 +29,7 @@ schema_view = get_swagger_view(title='Refrigerator-manager API')
 
 
 urlpatterns = [
+    url(r'^$', tempo_view, name='tempo_index'),
     url(settings.ADMIN_URL, admin.site.urls),
     url(r'^rest-swagger/', schema_view),
     url(r'^vegetables/?$', VegetablesListCreateAPIView.as_view(), name='query_for_vegetables_list'),
