@@ -115,6 +115,7 @@ invisible/
 /.secrets
 secrets.tar
 
-$ Static
+$ Static & templates
 staticfiles/
 static/
+templates/*

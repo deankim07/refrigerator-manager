@@ -11,7 +11,7 @@ class User(AbstractUser):
     name = models.CharField(_('Name of User'), blank=True, max_length=255)
     is_member = models.BooleanField(default=False)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.username
 
     def get_absolute_url(self):

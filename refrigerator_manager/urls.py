@@ -30,7 +30,7 @@ schema_view = get_swagger_view(title='Refrigerator-manager API')
 
 urlpatterns = [
     url(r'^$', tempo_view, name='tempo_index'),
-    url(settings.ADMIN_URL, admin.site.urls),
+    path('sodwkdrhdjemals/', admin.site.urls),
     url(r'^rest-swagger/', schema_view),
     url(r'^vegetables/?$', VegetablesListCreateAPIView.as_view(), name='query_for_vegetables_list'),
     url(r'^vegetables/(?P<vegetable_id>[0-9]+)/?$', VegetableRetrieveUpdateDeleteView.as_view(),
@@ -39,5 +39,5 @@ urlpatterns = [
     url(r'^forks/(?P<fork_id>[0-9]+)/?$', ForkRetrieveUpdateDeleteView.as_view(),
         name='retrieve_update_delete_fork_item'),
 
-    url(r'^.*', api_404, name='api_404'),
+    #url(r'^.*', api_404, name='api_404'),
 ]
